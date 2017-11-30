@@ -7,8 +7,17 @@ class TicTacToe {
   }
 
   select(field) {
-    this.grid[field] = this.players[0];
+    this.grid[field] = this.turn();
+    this.nextTurn();
     return this.grid;
+  }
+
+  turn() {
+    return this.players[0];
+  }
+
+  nextTurn() {
+    this.players.reverse();
   }
 
 }

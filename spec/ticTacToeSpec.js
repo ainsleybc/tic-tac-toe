@@ -24,11 +24,20 @@ describe('TicTacToe', () => {
 
   })
 
-  describe('cross', () => {
+  describe('select', () => {
     
     it('allows a field to be marked with a cross', () => {
       grid[0] = player1;
       expect(game.select(0)).toEqual(grid);
+    })
+
+  })
+
+  describe('turn', () => {
+    
+    it('shows the current turn', () => {
+      game.select(0);
+      expect(game.turn()).toEqual(player2);
     })
 
   })
