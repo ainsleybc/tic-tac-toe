@@ -2,8 +2,7 @@
 
 class TicTacToe {
 
-  constructor(player1, player2, size) {
-    this.size = size;
+  constructor(player1, player2, size = 3) {
     this.players = [player1, player2];
     this.grid = this._createGrid(size);
   }
@@ -25,14 +24,14 @@ class TicTacToe {
   winner() {
     var winner;
     this.grid.forEach((row, rowIndex) => {
-      row.forEach((cell, i) => {
-        if (this._ticTacToe(rowIndex, i)) winner = cell;
+      row.forEach((cell, columnIndex) => {
+        if (this._isTicTacToe(rowIndex, columnIndex)) winner = cell;
       })
     })
     return winner;
   }
 
-  _ticTacToe(r, c) {
+  _isTicTacToe(r, c) {
     return (this._checkRows(r, c) || this._checkColumns(r, c) || this._checkDiagonals(r, c));
   }
 

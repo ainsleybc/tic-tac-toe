@@ -9,7 +9,7 @@ describe('TicTacToe', () => {
   beforeEach(() => {
     player1 = 'player1',
     player2 = 'player2',
-    game    = new TicTacToe(player1, player2, 3);
+    game    = new TicTacToe(player1, player2);
     grid = [
       [undefined, undefined, undefined],
       [undefined, undefined, undefined],
@@ -24,6 +24,16 @@ describe('TicTacToe', () => {
     })
     it('initializes with a game board', () => {
       expect(game.board()).toEqual(grid);
+    })
+    it('can be given a size for the grid', () => {
+      grid = [
+        [undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined],
+        [undefined, undefined, undefined, undefined]
+      ]
+      game = new TicTacToe(player1, player2, 4);
+      expect(game.board()).toEqual(grid)
     })
 
   })
