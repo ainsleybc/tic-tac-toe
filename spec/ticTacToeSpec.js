@@ -61,4 +61,17 @@ describe('TicTacToe', () => {
 
   })
 
+  describe('winner', () => {
+
+    it('returns the winner of the game', () => {
+      game.select(0, 0);
+      game.select(1, 0);
+      game.select(0, 1);
+      game.select(1, 1);
+      game.select(0, 2);
+      expect(game.winner()).toEqual(player1);
+    })
+
+  })
+
 })

@@ -21,6 +21,24 @@ class TicTacToe {
   turn() {
     return this.players[0];
   }
+
+  winner() {
+    var winner;
+    this.grid.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        if (cell === this.grid[rowIndex][cellIndex + 1] && cell === this.grid[rowIndex][cellIndex + 2]) {
+          winner = cell;
+        } else if (cell === this.grid[rowIndex + 1][cellIndex] && cell === this.grid[rowIndex + 2][cellIndex]) {
+          winner = cell;
+        } else if (cell === this.grid[rowIndex + 1][cellIndex + 1] && cell === this.grid[rowIndex + 2][cellIndex + 2]) {
+          winner = cell;
+        } else {
+          return;
+        }
+      })
+    })
+    return winner;
+  }
   
   _nextTurn() {
     this.players.reverse();
