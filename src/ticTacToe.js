@@ -25,19 +25,30 @@ class TicTacToe {
   winner() {
     var winner;
     this.grid.forEach((row, rowIndex) => {
-      row.forEach((cell, cellIndex) => {
-        if (cell === this.grid[rowIndex][cellIndex + 1] && cell === this.grid[rowIndex][cellIndex + 2]) {
-          winner = cell;
-        } else if (cell === this.grid[rowIndex + 1][cellIndex] && cell === this.grid[rowIndex + 2][cellIndex]) {
-          winner = cell;
-        } else if (cell === this.grid[rowIndex + 1][cellIndex + 1] && cell === this.grid[rowIndex + 2][cellIndex + 2]) {
-          winner = cell;
-        } else {
-          return;
-        }
+      row.forEach((cell, i) => {
+        if (this._ticTacToe(rowIndex, i)) winner = cell;
       })
     })
     return winner;
+  }
+
+  _ticTacToe(r, c) {
+    return (this._checkRows(r, c) || this._checkColumns(r, c) || this._checkDiagonals(r, c));
+  }
+
+  _checkRows(r, c) {
+    var cell = this.grid[r][c];
+    return (cell === this.grid[r][c + 1] && cell === this.grid[r][c + 2]);
+  }
+
+  _checkColumns(r, c) {
+    var cell = this.grid[r][c];
+    return (cell === this.grid[r + 1][c] && cell === this.grid[r + 2][c]);
+  }
+
+  _checkDiagonals(r, c) {
+    var cell = this.grid[r][c];
+    return (cell === this.grid[r + 1][c + 1] && cell === this.grid[r + 2][c + 2]);
   }
   
   _nextTurn() {
