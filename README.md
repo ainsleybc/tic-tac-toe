@@ -13,6 +13,10 @@ As player 1,
 So I can make the first move,
 I want to be able to mark a field with my marker.
 
+As a player,
+So I can know what fields haven't been taken,
+I want to be able to see the game board.
+
 As both players,
 So we can know whos turn it is,
 We want to be able to end a turn.
