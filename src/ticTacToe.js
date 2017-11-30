@@ -7,6 +7,7 @@ class TicTacToe {
   }
 
   select(field) {
+    if (this.grid[field]) throw new Error('cell already selected');
     this.grid[field] = this.turn();
     this.nextTurn();
     return this.grid;

@@ -30,6 +30,10 @@ describe('TicTacToe', () => {
       grid[0] = player1;
       expect(game.select(0)).toEqual(grid);
     })
+    it('should not allow a field to be selected twice', () => {
+      game.select(0);
+      expect(() => { game.select(0) }).toThrowError('cell already selected');
+    })
 
   })
 
