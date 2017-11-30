@@ -9,8 +9,12 @@ describe('TicTacToe', () => {
   beforeEach(() => {
     player1 = 'player1',
     player2 = 'player2',
-    grid = Array(9); 
-    game    = new TicTacToe(player1, player2);
+    game    = new TicTacToe(player1, player2, 3);
+    grid = [
+      [undefined, undefined, undefined],
+      [undefined, undefined, undefined],
+      [undefined, undefined, undefined]
+    ]
   })
 
   describe('constructor', () => {
@@ -27,8 +31,8 @@ describe('TicTacToe', () => {
   describe('board', () => {
     
     it('shows the game board', () => {
-      grid[0] = player1;
-      game.select(0);      
+      grid[0][0] = player1;
+      game.select(0,0);      
       expect(game.board()).toEqual(grid);
     })
 
@@ -37,8 +41,8 @@ describe('TicTacToe', () => {
   describe('select', () => {
     
     it('allows a field to be marked with a cross', () => {
-      grid[0] = player1;
-      game.select(0)
+      grid[0][0] = player1;
+      game.select(0,0)
       expect(game.board()).toEqual(grid);
     })
     it('should not allow a field to be selected twice', () => {
@@ -51,7 +55,7 @@ describe('TicTacToe', () => {
   describe('turn', () => {
     
     it('shows the current turn', () => {
-      game.select(0);
+      game.select(0, 0);
       expect(game.turn()).toEqual(player2);
     })
 

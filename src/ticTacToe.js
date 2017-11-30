@@ -1,27 +1,37 @@
 'use strict';
 
 class TicTacToe {
-  constructor(player1, player2) {
+
+  constructor(player1, player2, size) {
+    this.size = size;
     this.players = [player1, player2];
-    this.grid = Array(9);
+    this.grid = this._createGrid(size);
   }
-
+  
   board() {
-    return this.grid;
+    return this.grid
   }
-
-  select(field) {
-    if (this.grid[field]) throw new Error('cell already selected');
-    this.grid[field] = this.turn();
-    this.nextTurn();
+  
+  select(row, column) {
+    if (this.grid[row][column]) throw new Error('cell already selected');
+    this.grid[row][column] = this.turn();
+    this._nextTurn();
   }
-
+  
   turn() {
     return this.players[0];
   }
-
-  nextTurn() {
+  
+  _nextTurn() {
     this.players.reverse();
+  }
+  
+  _createGrid(size) {
+    var grid = [];
+    for (var i = 0; i < size; i++) {
+      grid.push(new Array(size));
+    }
+    return grid;
   }
 
 }
