@@ -24,13 +24,13 @@ describe('TicTacToe', () => {
 
   })
 
-  // describe('cross', () => {
+  describe('cross', () => {
     
-  //   it('allows a field to be marked with a cross', () => {
+    it('allows a field to be marked with a cross', () => {
+      grid = [['X', '', ''], ['', '', ''], ['', '', '']];
+      expect(game.crossField(0, 0)).toEqual(grid);
+    })
 
-  //     game.cross()
-  //   })
-
-  // })
+  })
 
 })
