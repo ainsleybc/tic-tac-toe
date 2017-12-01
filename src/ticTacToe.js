@@ -7,8 +7,8 @@
     var _players = [player1, player2];
     var grid = _createGrid(size);
   
-    function board () {
-      return grid
+    function board() {
+      return grid;
     }
 
     function players () {
@@ -21,6 +21,10 @@
       _nextTurn();
     }
   
+    function winner() {
+      return _ticTacToe()[0];      
+    }
+
     function turn () {
       return _players[0];
     }
@@ -29,33 +33,61 @@
       _players.reverse();
     }
 
-    function winner () {
-      var winner;
-      grid.forEach((row, rowIndex) => {
-        row.forEach((cell, columnIndex) => {
-          if (_isTicTacToe(rowIndex, columnIndex)) winner = cell;
-        })
-      })
-      return winner;
+    function _gameEnded() {
+      return !!_ticTacToe();
     }
 
-    function _isTicTacToe (r, c) {
-      return (_checkRows(r, c) || _checkColumns(r, c) || _checkDiagonals(r, c));
+    function _ticTacToe(r, c) {
+      var Lines = _winningLines();
+      var winLine;
+      for (var i = 0; i < Lines.length; i++) {
+        if (!!Lines[i].reduce((a, b) => (a === b) ? a : NaN)) winLine = Lines[i];
+        if (winLine) { break; }
+      }
+      return winLine;
     }
 
-    function _checkRows (r, c) {
-      var cell = grid[r][c];
-      return (cell === grid[r][c + 1] && cell === grid[r][c + 2]);
+    function _winningLines() {
+      var lines = [];
+      lines.push(...grid) //rows
+      lines.push(..._winningColumns())
+      lines.push(..._winningDiagonals())
+      return lines;
     }
 
-    function _checkColumns (r, c) {
-      var cell = grid[r][c];
-      return (cell === grid[r + 1][c] && cell === grid[r + 2][c]);
+    function _winningColumns() {
+      var columns = [], column = [];
+      for (var i = 0; i < size; i++) {
+        for (var row = 0; row < size; row++) {
+          column.push(grid[row][i])
+        }
+        columns.push(column); column = [];
+      }
+      return columns
     }
 
-    function _checkDiagonals (r, c) {
-      var cell = grid[r][c];
-      return (cell === grid[r + 1][c + 1] && cell === grid[r + 2][c + 2]);
+    function _winningDiagonals() {
+      var diagonals = [];
+      diagonals.push(_downAndRight());
+      diagonals.push(_downAndLeft());
+      return diagonals;
+    }
+
+    function _downAndRight() {
+      var diagonal = [];
+      for (var i = 0; i < size; i++) {
+        diagonal.push(grid[i][i]);
+      }
+      return diagonal;
+    }
+
+    function _downAndLeft() {
+      var diagonal = [];
+      for (var i = 0; i < size; i++) {
+        var col = (size - 1 - i);
+        diagonal.push(grid[i][col]);
+      }
+      return diagonal;
     }
 
     function _createGrid (size) {
