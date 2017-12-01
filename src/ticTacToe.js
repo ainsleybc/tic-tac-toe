@@ -1,67 +1,74 @@
 'use strict';
 
-class TicTacToe {
-
-  constructor(player1, player2, size = 3) {
-    this.players = [player1, player2];
-    this.grid = this._createGrid(size);
-  }
+(function (exports) {
   
-  board() {
-    return this.grid
-  }
+  exports.TicTacToe = function (player1, player2, size = 3) {
+
+    var _players = [player1, player2];
+    var grid = _createGrid(size);
   
-  select(row, column) {
-    if (this.grid[row][column]) throw new Error('cell already selected');
-    this.grid[row][column] = this.turn();
-    this._nextTurn();
-  }
-  
-  turn() {
-    return this.players[0];
-  }
-
-  winner() {
-    var winner;
-    this.grid.forEach((row, rowIndex) => {
-      row.forEach((cell, columnIndex) => {
-        if (this._isTicTacToe(rowIndex, columnIndex)) winner = cell;
-      })
-    })
-    return winner;
-  }
-
-  _isTicTacToe(r, c) {
-    return (this._checkRows(r, c) || this._checkColumns(r, c) || this._checkDiagonals(r, c));
-  }
-
-  _checkRows(r, c) {
-    var cell = this.grid[r][c];
-    return (cell === this.grid[r][c + 1] && cell === this.grid[r][c + 2]);
-  }
-
-  _checkColumns(r, c) {
-    var cell = this.grid[r][c];
-    return (cell === this.grid[r + 1][c] && cell === this.grid[r + 2][c]);
-  }
-
-  _checkDiagonals(r, c) {
-    var cell = this.grid[r][c];
-    return (cell === this.grid[r + 1][c + 1] && cell === this.grid[r + 2][c + 2]);
-  }
-  
-  _nextTurn() {
-    this.players.reverse();
-  }
-  
-  _createGrid(size) {
-    var grid = [];
-    for (var i = 0; i < size; i++) {
-      grid.push(new Array(size));
+    function board () {
+      return grid
     }
-    return grid;
-  }
 
-}
+    function players () {
+      return _players;
+    }
+  
+    function select (row, column) {
+      if (grid[row][column]) throw new Error('cell already selected');
+      grid[row][column] = turn();
+      _nextTurn();
+    }
+  
+    function turn () {
+      return _players[0];
+    }
+    
+    function _nextTurn () {
+      _players.reverse();
+    }
 
-exports.TicTacToe = TicTacToe;
+    function winner () {
+      var winner;
+      grid.forEach((row, rowIndex) => {
+        row.forEach((cell, columnIndex) => {
+          if (_isTicTacToe(rowIndex, columnIndex)) winner = cell;
+        })
+      })
+      return winner;
+    }
+
+    function _isTicTacToe (r, c) {
+      return (_checkRows(r, c) || _checkColumns(r, c) || _checkDiagonals(r, c));
+    }
+
+    function _checkRows (r, c) {
+      var cell = grid[r][c];
+      return (cell === grid[r][c + 1] && cell === grid[r][c + 2]);
+    }
+
+    function _checkColumns (r, c) {
+      var cell = grid[r][c];
+      return (cell === grid[r + 1][c] && cell === grid[r + 2][c]);
+    }
+
+    function _checkDiagonals (r, c) {
+      var cell = grid[r][c];
+      return (cell === grid[r + 1][c + 1] && cell === grid[r + 2][c + 2]);
+    }
+
+    function _createGrid (size) {
+      var grid = [];
+      for (var i = 0; i < size; i++) {
+        grid.push(new Array(size));
+      }
+      return grid;
+    }
+
+    return { select, board, turn, winner, players }
+
+  }  
+
+})(this)
+

@@ -20,7 +20,7 @@ describe('TicTacToe', () => {
   describe('constructor', () => {
     
     it('initializes with two players', () => {
-      expect(game.players).toEqual([player1, player2]);
+      expect(game.players()).toEqual([player1, player2]);
     })
     it('initializes with a game board', () => {
       expect(game.board()).toEqual(grid);
